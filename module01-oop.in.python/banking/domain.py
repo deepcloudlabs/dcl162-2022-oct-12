@@ -62,3 +62,32 @@ class Account:
 
     def __str__(self):
         return f"Account [iban: {self.iban}, balance: {self.balance}, status: {self.status.name} ({self.status.value})]"
+
+
+"""
+    Account         : Base   /Super/Parent Class
+    CheckingAccount : Derived/Sub  /Child  Class
+"""
+
+
+class CheckingAccount(Account):
+    def __init__(self, iban, balance=50, status=AccountStatus.ACTIVE, overdraftAmount=500):
+        super().__init__(iban, balance, status)
+        self._overdraftAmount = overdraftAmount
+
+    @property
+    def overdraftAmount(self):
+        return self._overdraftAmount
+
+    def withdraw(self, amount):  # overrides Account's withdraw
+        if amount <= 0:
+            raise ValueError("You must provide a positive amount.")
+        if amount > (self.balance + self.overdraftAmount):
+            deficit = amount - self.balance - self.overdraftAmount
+            raise InsufficientBalanceError("Your balance does not cover your expenses.", deficit)
+        self._balance -= amount
+        return self.balance
+
+    def __str__(self):  # overriding
+        return f"CheckingAccount [iban: {self.iban}, balance: {self.balance}, status: {self.status.name} ({self.status.value}), " \
+               f"overdraftAmount: {self.overdraftAmount}]"
