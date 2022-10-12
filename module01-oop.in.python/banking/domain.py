@@ -13,8 +13,34 @@ class InsufficientBalanceError(Exception):
         self.deficit = deficit
 
 
-# domain class -> entity: identity, solution class
-class Account:
+class G:
+    def __init__(self):
+        self.x = 42
+
+
+class A(G):
+    pass
+
+
+class B(G):
+    pass
+
+
+class C(A, B):
+    pass
+
+
+class IAccount:  # interface
+    def deposit(self, amount):
+        pass
+
+    def withdraw(self, amount):
+        pass
+
+    # domain class -> entity: identity, solution class
+
+
+class Account(IAccount):
     # constructor
     def __init__(self, iban, balance=50, status=AccountStatus.ACTIVE):
         print("Account's Constructor is running...")
@@ -52,6 +78,7 @@ class Account:
         return self._balance
 
     def withdraw(self, amount):
+        print("Account::withdraw")
         if amount <= 0:
             raise ValueError("You must provide a positive amount.")
         if amount > self._balance:
@@ -80,6 +107,7 @@ class CheckingAccount(Account):
         return self._overdraftAmount
 
     def withdraw(self, amount):  # overrides Account's withdraw
+        print("CheckingAccount::withdraw")
         if amount <= 0:
             raise ValueError("You must provide a positive amount.")
         if amount > (self.balance + self.overdraftAmount):
