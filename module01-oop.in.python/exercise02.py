@@ -13,7 +13,7 @@ bank_accounts = [
 def withdrawMoney(accounts, amount):
     for account in accounts:
         if account.status == AccountStatus.ACTIVE:
-            if isinstance(account, CheckingAccount):
+            if isinstance(account, Account):
                 account.withdraw(2*amount)
             else:
                 account.withdraw(amount)
