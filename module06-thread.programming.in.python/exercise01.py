@@ -1,11 +1,19 @@
-from threading import Thread
+from threading import Thread, Lock
+
+data = 0
+lock = Lock()
 
 
 def task(name):
+    global data
     print(f"Task ({name}) has just started!")
-    for i in range(0, 1000):
-        print(f"{name}: {i}")
-    print(f"Task ({name}) has completed!")
+    for i in range(0, 100000):
+        with lock:
+            local = data
+            local += 1
+            print(f"{name} -> {local}")
+            data = local
+    print(f"Task ({name}) has completed: {data}")
 
 
 t1 = Thread(target=task, args=("Thread A",))
@@ -18,4 +26,4 @@ t1.join()
 print("t1 completed!")
 t2.join()
 print("t2 completed!")
-print("application is done.")
+print(f"application is done: {data}")
