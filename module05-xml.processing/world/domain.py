@@ -31,11 +31,11 @@ class Country:
         self._continent = continent
 
     @property
-    def population(self):
+    def nufus(self):
         return self._population
 
-    @population.setter
-    def population(self, population):
+    @nufus.setter
+    def nufus(self, population):
         self._population = int(population)
 
     @property
@@ -47,4 +47,4 @@ class Country:
         self._surface_area = float(surfaceArea)
 
     def __str__(self):
-        return f"Country [code: {self.code}, name: {self.name}, continent: {self.continent}, population: {self.population}, surface area:{self.surfaceArea}]"
+        return f"Country [code: {self.code}, name: {self.name}, continent: {self.continent}, population: {self.nufus}, surface area:{self.surfaceArea}]"

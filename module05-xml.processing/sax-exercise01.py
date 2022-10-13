@@ -15,7 +15,7 @@ class CountryHandler(xml.sax.ContentHandler):
             "Name": "name",
             "Continent": "continent",
             "SurfaceArea": "surfaceArea",
-            "Population": "population"
+            "Population": "nufus"
         }
 
     @property
@@ -67,8 +67,8 @@ parser.parse("resources/countries.xml")
 for country in handler.countries:
     print(country)
 print("\nFinding populated countries....\n")
-handler.predicate = lambda ctry: ctry.population > 100000000
-handler.sorter = lambda ctry: ctry.population
+handler.predicate = lambda ctry: ctry.nufus > 100000000
+handler.sorter = lambda ctry: ctry.nufus
 parser.parse("resources/countries.xml")
 for country in handler.countries:
     print(country)
