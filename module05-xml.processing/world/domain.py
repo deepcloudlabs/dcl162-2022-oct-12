@@ -45,3 +45,6 @@ class Country:
     @surfaceArea.setter
     def surfaceArea(self, surfaceArea):
         self._surface_area = float(surfaceArea)
+
+    def __str__(self):
+        return f"Country [code: {self.code}, name: {self.name}, continent: {self.continent}, population: {self.population}, surface area:{self.surfaceArea}]"
