@@ -18,7 +18,6 @@ class InsufficientBalanceError(Exception):
 class Account:
     # constructor
     def __init__(self, iban, balance=50, status=AccountStatus.ACTIVE):
-        print("Account's Constructor is running...")
         self._iban = iban  # attribute/state/data/field
         self._balance = balance
         self._status = status
@@ -27,17 +26,14 @@ class Account:
 
     @property
     def iban(self):  # read-only property
-        print("getter Account::iban")
         return self._iban
 
     @property
     def balance(self):  # read-only property
-        print("getter Account::balance")
         return self._balance
 
     @property
     def status(self):
-        print("getter Account::status")
         return self._status
 
     @status.setter
@@ -55,7 +51,6 @@ class Account:
 
     # business method
     def withdraw(self, amount):
-        print("Account::withdraw")
         if amount <= 0:
             raise ValueError("You must provide a positive amount.")
         if amount > self._balance:
@@ -84,7 +79,6 @@ class CheckingAccount(Account):
         return self._overdraftAmount
 
     def withdraw(self, amount):  # overrides Account's withdraw
-        print("CheckingAccount::withdraw")
         if amount <= 0:
             raise ValueError("You must provide a positive amount.")
         if amount > (self.balance + self.overdraft_amount):

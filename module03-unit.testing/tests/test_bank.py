@@ -25,4 +25,6 @@ def test_get_customer_account_is_success(a_bank, mocker):
     jack = a_bank.create_customer("1", "jack bauer")
     account = Account("TR1", 1000)
     mocker.patch('banking.bank.Customer.get_account', return_value=account)
-    assert a_bank.get_account("TR1") == account
+    returned_account = a_bank.get_account("TR1")
+    assert returned_account == account
+    assert returned_account.iban == "TR1"
