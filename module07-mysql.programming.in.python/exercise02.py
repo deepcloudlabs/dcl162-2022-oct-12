@@ -7,6 +7,12 @@ mysql_connection = connector.connect(
     database="banking"
 )
 
+# Before you run the scripts, please create a database called banking
+"""
+mysql> create database banking;
+Query OK, 1 row affected (0.01 sec)
+"""
+
 my_cursor = mysql_connection.cursor()
 my_cursor.execute("""
     create table accounts(
