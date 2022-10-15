@@ -44,7 +44,7 @@ def add_employee():
     return jsonify({"status": "ok"})
 
 
-@api.route("/hr/api/v1/employees/<identity>", methods=["PUT"])
+@api.route("/hr/api/v1/employees/<identity>", methods=["PUT", "PATCH"])
 def update_employee(identity):
     employee = extract_employee_from_request(request, fields)
     employees.find_one_and_update(
